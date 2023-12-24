@@ -540,38 +540,33 @@
       *    "HI" MATCH THAT TRIGGERED THE HELLO/HI KEYWORD RESPONSES, *
       *    SO THEY ARE MASKED HERE TO PREVENT THAT.                  *
       *    ALSO REMOVE TRAILING "?", "!", AND "." CHARACTERS.        *
-      ****************************************************************
+      ****************************************************************/home/spg/src/vscode_cobol/cobol-9.12.21.vsix
 
        1100-MASK-STRING-HI.          
                                                 
-           MOVE FUNCTION SUBSTITUTE 
-               (210-USER-INPUT-LC, 520-THING-IN, 520-THING-OUT, 
-                                   520-HIGH-IN,  520-HIGH-OUT, 
-                                   520-SHI-IN,   520-SHI-OUT,  
-                                   520-CHI-IN,   520-CHI-OUT,  
-                                   520-HIT-IN,   520-HIT-OUT,  
-                                   520-OUR-IN,   520-OUR-OUT, 
-                                   520-QMARK-IN, 520-QMARK-OUT, 
-                                   520-XMARK-IN, 520-QMARK-OUT, 
-                                   520-FSTOP-IN, 520-FSTOP-OUT) 
-                                       TO 250-SUBSTITUTE-WORK 
-           MOVE 250-SUBSTITUTE-WORK    TO 210-USER-INPUT-LC    
+           INSPECT 210-USER-INPUT-LC REPLACING ALL
+                   520-THING-IN  BY 520-THING-OUT  
+                   520-HIGH-IN   BY 520-HIGH-OUT  
+                   520-SHI-IN    BY 520-SHI-OUT   
+                   520-CHI-IN    BY 520-CHI-OUT   
+                   520-HIT-IN    BY 520-HIT-OUT   
+                   520-OUR-IN    BY 520-OUR-OUT  
+                   520-QMARK-IN  BY 520-QMARK-OUT  
+                   520-XMARK-IN  BY 520-QMARK-OUT  
+                   520-FSTOP-IN  BY 520-FSTOP-OUT  
       ****************************************************************
       *    REMOVE MULTIPLE TRAILING QUESTION MARKS, EXCLAMATION      *
       *    POINTS, AND PERIODS (FULL STOPS).                         *
       ****************************************************************
-           MOVE FUNCTION SUBSTITUTE 
-               (210-USER-INPUT-LC, 520-QMARK-IN, 520-QMARK-OUT, 
-                                   520-XMARK-IN, 520-QMARK-OUT, 
-                                   520-FSTOP-IN, 520-FSTOP-OUT) 
-                                       TO 250-SUBSTITUTE-WORK 
-           MOVE 250-SUBSTITUTE-WORK    TO 210-USER-INPUT-LC    
-           MOVE FUNCTION SUBSTITUTE 
-               (210-USER-INPUT-LC, 520-QMARK-IN, 520-QMARK-OUT, 
-                                   520-XMARK-IN, 520-QMARK-OUT, 
-                                   520-FSTOP-IN, 520-FSTOP-OUT) 
-                                       TO 250-SUBSTITUTE-WORK 
-           MOVE 250-SUBSTITUTE-WORK    TO 210-USER-INPUT-LC    
+           INSPECT 210-USER-INPUT-LC REPLACING ALL
+                   520-QMARK-IN  BY 520-QMARK-OUT  
+                   520-XMARK-IN  BY 520-QMARK-OUT  
+                   520-FSTOP-IN  BY 520-FSTOP-OUT
+
+           INSPECT 210-USER-INPUT-LC REPLACING ALL
+                   520-QMARK-IN  BY 520-QMARK-OUT  
+                   520-XMARK-IN  BY 520-QMARK-OUT  
+                   520-FSTOP-IN  BY 520-FSTOP-OUT    
            .
 
       ****************************************************************
@@ -583,15 +578,13 @@
 
        1200-RESTORE-STRING-HI.       
                                                 
-           MOVE FUNCTION SUBSTITUTE 
-               (210-USER-INPUT-LC, 520-THING-OUT, 520-THING-IN, 
-                                   520-HIGH-OUT,  520-HIGH-IN, 
-                                   520-SHI-OUT,   520-SHI-IN,  
-                                   520-CHI-OUT,   520-CHI-IN,  
-                                   520-HIT-OUT,   520-HIT-IN,  
-                                   520-OUR-OUT,   520-OUR-IN) 
-                                       TO 250-SUBSTITUTE-WORK 
-           MOVE 250-SUBSTITUTE-WORK    TO 210-USER-INPUT-LC    
+           INSPECT 210-USER-INPUT-LC REPLACING ALL
+                   520-THING-OUT  BY 520-THING-IN  
+                   520-HIGH-OUT   BY 520-HIGH-IN  
+                   520-SHI-OUT    BY 520-SHI-IN   
+                   520-CHI-OUT    BY 520-CHI-IN   
+                   520-HIT-OUT    BY 520-HIT-IN   
+                   520-OUR-OUT    BY 520-OUR-IN    
            .
 
       ****************************************************************
@@ -606,35 +599,30 @@
        
            MOVE 210-USER-INPUT-LC (400-HOLD-OFFSET:)
                                        TO 230-TRANSLATED-INPUT.
-                                                
-           MOVE FUNCTION SUBSTITUTE 
-               (230-TRANSLATED-INPUT, 520-ARE-IN,  520-AM-OUT,       
-                                      520-WERE-IN, 520-WAS-OUT       
-                                      520-YOU-IN,  520-I-FIX,     
-                                      520-YOUR-IN, 520-MY-FIX,        
-                                      520-MY-IN,   520-YOUR-FIX,        
-                                      520-IVE-IN,  520-YOUVE-OUT,       
-                                      520-IM-IN,   520-YOURE-OUT,    
-                                      520-I-AM-IN, 520-YOURE-OUT,    
-                                      520-ME-IN,   520-YOU-FIX,      
-                                      520-I-IN,    520-YOU-FIX,      
-                                      520-YOURE-IN 520-IM-FIX,      
-                                  520-YOU-ARE-IN   520-I-AM-FIX,      
-                                  520-YOURSELF-IN, 520-MYSELF-OUT)
-                                       TO 250-SUBSTITUTE-WORK.  
+      *FIXME: REPLACE SUBSTITUTE                                               
+      *    INSPECT 230-TRANSLATED-INPUT REPLACING ALL
+      *            520-ARE-IN   BY 520-AM-OUT        
+      *            520-WERE-IN  BY 520-WAS-OUT       
+      *            520-YOU-IN   BY 520-I-FIX      
+      *            520-YOUR-IN  BY 520-MY-FIX         
+      *            520-MY-IN    BY 520-YOUR-FIX         
+      *            520-IVE-IN   BY 520-YOUVE-OUT        
+      *            520-IM-IN    BY 520-YOURE-OUT     
+      *            520-I-AM-IN  BY 520-YOURE-OUT     
+      *            520-ME-IN    BY 520-YOU-FIX       
+      *            520-I-IN     BY 520-YOU-FIX       
+      *            520-YOURE-IN BY 520-IM-FIX       
+      *            520-YOU-ARE-IN   BY 520-I-AM-FIX       
+      *            520-YOURSELF-IN  BY 520-MYSELF-OUT
 
-           MOVE 250-SUBSTITUTE-WORK TO 230-TRANSLATED-INPUT. 
-                              
-           MOVE FUNCTION SUBSTITUTE 
-               (230-TRANSLATED-INPUT, 520-I-FIX,     520-I-OUT, 
-                                      520-IM-FIX,    520-IM-OUT, 
-                                      520-I-AM-FIX,  520-I-AM-OUT, 
-                                      520-MY-FIX,    520-MY-OUT, 
-                                      520-YOUR-FIX,  520-YOUR-OUT, 
-                                      520-YOU-FIX,   520-YOU-OUT) 
-                                       TO 250-SUBSTITUTE-WORK.
-                                                
-           MOVE 250-SUBSTITUTE-WORK    TO 230-TRANSLATED-INPUT 
+      *FIXME: REPLACE SUBSTITUTE          
+      *    INSPECT 230-TRANSLATED-INPUT REPLACING ALL
+      *            520-I-FIX      BY 520-I-OUT  
+      *            520-IM-FIX     BY 520-IM-OUT  
+      *            520-I-AM-FIX   BY 520-I-AM-OUT  
+      *            520-MY-FIX     BY 520-MY-OUT  
+      *            520-YOUR-FIX   BY 520-YOUR-OUT  
+      *            520-YOU-FIX    BY 520-YOU-OUT
            .
 
       ****************************************************************
@@ -694,26 +682,26 @@
       ****************************************************************
 
        3100-FIX-MORE-BAD-GRAMMAR. 
+      *FIXME: REPLACE SUBSTITUTE
+      *    MOVE FUNCTION SUBSTITUTE (240-REPLY, 
+      *        " you want I ",            " you want me ",            
+      *        " you got I ",             " you got me ",            
+      *        " to make I ",             " to make me ",            
+      *        " you been I ",            " you been me ",            
+      *        " you be I ",              " you be me ",            
+      *        " to be I ",               " to be me ",            
+      *        " soon got I ",            " soon got me ", 
+      *        " never got I ",           " never got me ",       
+      *        " sometimes also want I ", " sometimes also want me ", 
+      *        " normal to be I ",        " normal to be me ", 
+      *        " enjoy being I ",         " enjoy being me ", 
+      *        " can't make I ",          " can't make me ", 
+      *        " can now make I ",        " can now make me ", 
+      *        " I are ",                 " I am ",            
+      *        " you am ",                " you are ",       
+      *        " with I ",                " with me")       
+      *                                TO 250-SUBSTITUTE-WORK.  
 
-           MOVE FUNCTION SUBSTITUTE (240-REPLY, 
-               " you want I ",            " you want me ",            
-               " you got I ",             " you got me ",            
-               " to make I ",             " to make me ",            
-               " you been I ",            " you been me ",            
-               " you be I ",              " you be me ",            
-               " to be I ",               " to be me ",            
-               " soon got I ",            " soon got me ", 
-               " never got I ",           " never got me ",       
-               " sometimes also want I ", " sometimes also want me ", 
-               " normal to be I ",        " normal to be me ", 
-               " enjoy being I ",         " enjoy being me ", 
-               " can't make I ",          " can't make me ", 
-               " can now make I ",        " can now make me ", 
-               " I are ",                 " I am ",            
-               " you am ",                " you are ",       
-               " with I ",                " with me")       
-                                       TO 250-SUBSTITUTE-WORK.  
-
-           MOVE 250-SUBSTITUTE-WORK TO 240-REPLY.              
+      *    MOVE 250-SUBSTITUTE-WORK TO 240-REPLY.              
 
        END PROGRAM ELIZA.
