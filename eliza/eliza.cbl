@@ -453,6 +453,14 @@
            05  600-NO-REPEAT-MSG           PIC X(32)   VALUE
                "Please don't repeat yourself!".
 
+       01 TY-PIC100 typedef.
+           03 pic x(80).
+
+       01 TY-PIC20 typedef.
+           03 pic x(20).
+          
+       01 ws-line      usage TY-PIC100 value "Mr am# was here (am#)".
+       01 ws-p1        usage TY-PIC100.
        PROCEDURE DIVISION.
 
       ****************************************************************
@@ -598,31 +606,101 @@
        2000-TRANSLATE-USER-INPUT.
        
            MOVE 210-USER-INPUT-LC (400-HOLD-OFFSET:)
-                                       TO 230-TRANSLATED-INPUT.
-      *FIXME: REPLACE SUBSTITUTE                                               
-      *    INSPECT 230-TRANSLATED-INPUT REPLACING ALL
-      *            520-ARE-IN   BY 520-AM-OUT        
-      *            520-WERE-IN  BY 520-WAS-OUT       
-      *            520-YOU-IN   BY 520-I-FIX      
-      *            520-YOUR-IN  BY 520-MY-FIX         
-      *            520-MY-IN    BY 520-YOUR-FIX         
-      *            520-IVE-IN   BY 520-YOUVE-OUT        
-      *            520-IM-IN    BY 520-YOURE-OUT     
-      *            520-I-AM-IN  BY 520-YOURE-OUT     
-      *            520-ME-IN    BY 520-YOU-FIX       
-      *            520-I-IN     BY 520-YOU-FIX       
-      *            520-YOURE-IN BY 520-IM-FIX       
-      *            520-YOU-ARE-IN   BY 520-I-AM-FIX       
-      *            520-YOURSELF-IN  BY 520-MYSELF-OUT
+                                       TO 230-TRANSLATED-INPUT
 
-      *FIXME: REPLACE SUBSTITUTE          
-      *    INSPECT 230-TRANSLATED-INPUT REPLACING ALL
-      *            520-I-FIX      BY 520-I-OUT  
-      *            520-IM-FIX     BY 520-IM-OUT  
-      *            520-I-AM-FIX   BY 520-I-AM-OUT  
-      *            520-MY-FIX     BY 520-MY-OUT  
-      *            520-YOUR-FIX   BY 520-YOUR-OUT  
-      *            520-YOU-FIX    BY 520-YOU-OUT
+           MOVE 230-TRANSLATED-INPUT TO ws-line
+           MOVE SPACE TO WS-P1
+           STRING  520-ARE-IN      DELIMITED BY SIZE
+                   "="             DELIMITED BY SIZE 
+                   520-AM-OUT      DELIMITED BY SIZE 
+                   "/"             DELIMITED BY SIZE       
+                   520-WERE-IN     DELIMITED BY SIZE
+                   "="             DELIMITED BY SIZE 
+                   520-WAS-OUT     DELIMITED BY SIZE
+                   "/"             DELIMITED BY SIZE      
+                   520-YOU-IN      DELIMITED BY SIZE
+                   "="             DELIMITED BY SIZE 
+                   520-I-FIX       DELIMITED BY SIZE
+                   "/"             DELIMITED BY SIZE      
+                   520-YOUR-IN     DELIMITED BY SIZE
+                   "="             DELIMITED BY SIZE 
+                   520-MY-FIX      DELIMITED BY SIZE
+                   "/"             DELIMITED BY SIZE         
+                   520-MY-IN       DELIMITED BY SIZE
+                   "="             DELIMITED BY SIZE 
+                   520-YOUR-FIX    DELIMITED BY SIZE
+                   "/"             DELIMITED BY SIZE         
+                   520-IVE-IN      DELIMITED BY SIZE
+                   "="             DELIMITED BY SIZE 
+                   520-YOUVE-OUT   DELIMITED BY SIZE
+                   "/"             DELIMITED BY SIZE        
+                   520-IM-IN       DELIMITED BY SIZE
+                   "="             DELIMITED BY SIZE 
+                   520-YOURE-OUT   DELIMITED BY SIZE
+                   "/"             DELIMITED BY SIZE     
+                   520-I-AM-IN     DELIMITED BY SIZE
+                   "="             DELIMITED BY SIZE 
+                   520-YOURE-OUT   DELIMITED BY SIZE
+                   "/"             DELIMITED BY SIZE     
+                   520-ME-IN       DELIMITED BY SIZE
+                   "="             DELIMITED BY SIZE 
+                   520-YOU-FIX     DELIMITED BY SIZE
+                   "/"             DELIMITED BY SIZE       
+                   520-I-IN        DELIMITED BY SIZE
+                   "="             DELIMITED BY SIZE 
+                   520-YOU-FIX     DELIMITED BY SIZE
+                   "/"             DELIMITED BY SIZE       
+                   520-YOURE-IN    DELIMITED BY SIZE
+                   "="             DELIMITED BY SIZE 
+                   520-IM-FIX      DELIMITED BY SIZE
+                   "/"             DELIMITED BY SIZE       
+                   520-YOU-ARE-IN  DELIMITED BY SIZE
+                   "="             DELIMITED BY SIZE 
+                   520-I-AM-FIX    DELIMITED BY SIZE
+                   "/"             DELIMITED BY SIZE       
+                   520-YOURSELF-IN DELIMITED BY SIZE
+                   "="             DELIMITED BY SIZE 
+                   520-MYSELF-OUT  DELIMITED BY SIZE
+                   "/"             DELIMITED BY SIZE
+                   into ws-p1
+           end-string
+           perform rep-ws-line(ws-line, ws-p1)
+
+           STRING  520-I-FIX       DELIMITED BY SIZE
+                   "="             DELIMITED BY SIZE
+                   520-I-OUT       DELIMITED BY SIZE
+                   "/"             DELIMITED BY SIZE
+
+                   520-IM-FIX      DELIMITED BY SIZE
+                   "="             DELIMITED BY SIZE
+                   520-IM-OUT      DELIMITED BY SIZE
+                   "/"             DELIMITED BY SIZE
+
+                   520-I-AM-FIX    DELIMITED BY SIZE
+                   "="             DELIMITED BY SIZE
+                   520-I-AM-OUT    DELIMITED BY SIZE
+                   "/"             DELIMITED BY SIZE
+
+                   520-MY-FIX      DELIMITED BY SIZE
+                   "="             DELIMITED BY SIZE
+                   520-MY-OUT      DELIMITED BY SIZE
+                   "/"             DELIMITED BY SIZE
+
+                   520-YOUR-FIX    DELIMITED BY SIZE
+                   "="             DELIMITED BY SIZE
+                   520-YOUR-OUT    DELIMITED BY SIZE
+                   "/"             DELIMITED BY SIZE
+
+                   520-YOU-FIX     DELIMITED BY SIZE
+                   "="             DELIMITED BY SIZE
+                   520-YOU-OUT     DELIMITED BY SIZE
+                   "/"             DELIMITED BY SIZE
+                   into ws-p1
+           END-STRING
+
+           perform rep-ws-line(ws-line, ws-p1)
+           MOVE ws-line to 230-TRANSLATED-INPUT
+
            .
 
       ****************************************************************
@@ -682,26 +760,99 @@
       ****************************************************************
 
        3100-FIX-MORE-BAD-GRAMMAR. 
-      *FIXME: REPLACE SUBSTITUTE
-      *    MOVE FUNCTION SUBSTITUTE (240-REPLY, 
-      *        " you want I ",            " you want me ",            
-      *        " you got I ",             " you got me ",            
-      *        " to make I ",             " to make me ",            
-      *        " you been I ",            " you been me ",            
-      *        " you be I ",              " you be me ",            
-      *        " to be I ",               " to be me ",            
-      *        " soon got I ",            " soon got me ", 
-      *        " never got I ",           " never got me ",       
-      *        " sometimes also want I ", " sometimes also want me ", 
-      *        " normal to be I ",        " normal to be me ", 
-      *        " enjoy being I ",         " enjoy being me ", 
-      *        " can't make I ",          " can't make me ", 
-      *        " can now make I ",        " can now make me ", 
-      *        " I are ",                 " I am ",            
-      *        " you am ",                " you are ",       
-      *        " with I ",                " with me")       
-      *                                TO 250-SUBSTITUTE-WORK.  
+           move 240-REPLY to ws-line         
+           move  
+               " you want I = you want me /" &            
+               " you got I = you got me /" &            
+               " to make I = to make me /" &            
+               " you been I = you been me /" &            
+               " you be I = you be me /" &            
+               " to be I = to be me /" &            
+               " soon got I = soon got me /" & 
+               " never got I = never got me /" &       
+               " sometimes also want I = sometimes also want me /" & 
+               " normal to be I = normal to be me /" & 
+               " enjoy being I = enjoy being me /" & 
+               " can't make I = can't make me /" & 
+               " can now make I = can now make me /" & 
+               " I are = I am /" &            
+               " you am = you are /" &       
+               " with I = with me"
+                   to ws-p1
+           perform rep-ws-line(ws-line, ws-p1)
+           move ws-line to 240-REPLY
+           .
+       rep-ws-line section(reference p-line as ty-pic100,
+                           reference p-swap-line as ty-pic100).
 
-      *    MOVE 250-SUBSTITUTE-WORK TO 240-REPLY.              
+           declare p-find as ty-pic20 = spaces
+           declare p-swap as ty-pic20 = spaces
+           declare u-pointer as binary-long = 1
 
+           declare p-line-len as binary-long
+           declare p-find-len as binary-long 
+           declare p-swap-len as binary-long 
+
+           perform until u-pointer > length of p-line
+
+               unstring p-swap-line delimited by "=", "/"
+                   into p-find, p-swap
+                   with pointer u-pointer
+               end-unstring
+               
+               if u-pointer > length of p-line
+                   exit perform
+               end-if
+               
+               move get-len-of-p80(p-line) to p-line-len
+               move get-len-of-param(p-find) to p-find-len
+               move get-len-of-param(p-swap) to p-swap-len
+    
+               declare l as binary-long
+               declare swapped as ty-pic100 = spaces
+               declare swapped-pos as binary-long = 1
+               perform varying l from 1 by 1 until l > p-line-len
+                   if p-line(l:p-find-len) equal p-find(1:p-find-len)
+                       move p-swap(1:p-swap-len) to 
+                           swapped(swapped-pos:p-swap-len)
+    
+                       add p-swap-len to swapped-pos
+                       add p-find-len to l
+                       subtract 1 from l
+                   else
+                       move p-line(l:1) to swapped(swapped-pos:1)
+                       add 1 to swapped-pos
+                   end-if
+               end-perform
+               move swapped to p-line
+           end-perform
+       .
+
+       get-len-of-p80 section(reference p-p100 as ty-pic100)
+                              giving len-of-p100 as binary-long.
+
+           declare count-of-trailing-spaces as binary-long = 0
+
+           inspect function reverse ( p-p100 )
+                   tallying count-of-trailing-spaces
+                   for leading space
+           
+           compute len-of-p100 = length of p-p100 
+                                - count-of-trailing-spaces
+           end-compute
+           .
+
+       get-len-of-param section(reference lparam as ty-pic20)
+                                giving len-of-param as binary-long.
+
+           declare count-of-trailing-spaces as binary-long = 0
+ 
+           inspect function reverse ( lparam )
+                   tallying count-of-trailing-spaces
+                   for leading space
+           
+           compute len-of-param = length of lparam 
+                                   - count-of-trailing-spaces
+           end-compute
+           .
        END PROGRAM ELIZA.
