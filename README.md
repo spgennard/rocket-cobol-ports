@@ -12,3 +12,6 @@ COBOL source code compatible with 'Micro Focus COBOL' ported from the web
 Changes made:
  - Removed used of non-portable "FUNCTION SUBSTITUTE"
    - Change either to "INSPECT REPLACING" if src/target are same length or custom section
+
+# prime_machine
+ - USAGE is reserved word and cannot be used a symbolic constant
