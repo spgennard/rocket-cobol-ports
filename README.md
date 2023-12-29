@@ -15,4 +15,9 @@ Changes made:
    - Change either to "INSPECT REPLACING" if src/target are same length or custom section
 
 # prime_machine
+
+Changes made:
+
  - USAGE is reserved word and cannot be used a symbolic constant
+ - remove >>elif, as it is not portable and use >>evaluate
+ - replace non-portable copybook reference and use local 78' items
