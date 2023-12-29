@@ -21,3 +21,12 @@ Changes made:
  - USAGE is reserved word and cannot be used a symbolic constant
  - remove >>elif, as it is not portable and use >>evaluate
  - replace non-portable copybook reference and use local 78' items
+
+# raylib_painter
+
+Changes made;
+  
+  - 'values' on redefines is non-portable
+  - literal's passed to 'C' need to be zero terminated, so use z"..."
+  - convert "returning omitted" to CALL no-return-code
+  - add .h and used h2py to weed-out any parameter call'ing issues
