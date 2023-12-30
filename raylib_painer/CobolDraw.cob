@@ -80,29 +80,29 @@
        data division.
        working-storage section.
       *>    Used to check keystrokes
-       77   gnucobol1           pic 9              value            3.
-       77   gnucobol2           pic 9              value            3.
-       77   risposta            int                value            1.
-       77   frecciagiu          pic 9              value            0.
-       77   frecciasu           pic 9              value            0.
+       77   gnucobol1           int               value            3.
+       77   gnucobol2           int               value            3.
+       77   risposta            int               value            2.
+       77   frecciagiu          int               value            0.
+       77   frecciasu           int               value            0.
 
       *>    CALL return variable
        77   ritorno             usage int.
 
       *>    Write Circle
-       77   scrivi-cerchio      usage binary-short.
+       77   scrivi-cerchio      usage int.
 
       *>    Change Circle
-       77   cambia-cerchio      usage binary-short value            0.
+       77   cambia-cerchio      usage int value            0.
 
       *>    Esc key
-       77   tasto-esc           usage binary-short.
+       77   tasto-esc           usage int.
 
       *>    X Coordinates
-       77   x-pos               usage binary-short.
+       77   x-pos               usage int.
 
       *>    Y Coordinates
-       77   y-pos               usage binary-short.
+       77   y-pos               usage int.
 
       *>    Control Switch to Blend Mode (ParticelleBlend)
        77   tipoblend           usage binary-long  value            0.
@@ -121,7 +121,7 @@
        77   colore              usage binary-long  unsigned.
 
       *>    End
-       77   fine                pic 9              value            0.
+       77   fine                int               value            0.
 
       *>    Mouse position
        01   posizione-mouse     usage pointer.
