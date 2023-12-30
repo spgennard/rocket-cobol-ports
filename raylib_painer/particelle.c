@@ -47,11 +47,19 @@ int blending = BLEND_ALPHA;
 
 Texture2D smoke;
 
+Texture2D big_smoke;
+Texture2D big_small;
+
+int particelle0()
+{
+    big_smoke = LoadTexture("spark_flame_big.png");
+    big_small = LoadTexture("spark_flame_small.png"); 
+}
 
 int particelle1(int risposta)
 {
-    if (risposta == 5) smoke = LoadTexture("spark_flame_big.png");
-       else smoke = LoadTexture("spark_flame_small.png"); 
+    if (risposta == 5) smoke = big_smoke;
+       else smoke = big_small; 
     
     
     for (int i = 0; i < MAX_PARTICLES; i++)

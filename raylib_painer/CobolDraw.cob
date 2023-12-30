@@ -183,6 +183,8 @@
                     end-display
             end-call
 
+           call "particelle0"
+           
       *>    Set frames per second
             call no-return-code "SetTargetFPS" using
                 by value 60
