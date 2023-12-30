@@ -30,3 +30,4 @@ Changes made;
   - literal's passed to 'C' need to be zero terminated, so use z"..."
   - convert "returning omitted" to CALL no-return-code
   - add .h and used h2py to weed-out any parameter call'ing issues
+  - fix memory leak in 'C' code
