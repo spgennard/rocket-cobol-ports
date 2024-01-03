@@ -7,7 +7,7 @@ COBOL source code compatible with 'Micro Focus COBOL' ported from the web
 | Prime Machine              | [prime_machiine.cob](https://github.com/OCamlPro/gnucobol-contrib/blob/master/samples/prime_machine/prime_machine.cob) | prime_machine  | -                           |
 | raylib_painter             | [CobolDraw.cob](https://github.com/OCamlPro/gnucobol-contrib/blob/master/samples/raylib_painter/CobolDraw.cob)         | raylib_painter | -                           |
 | cobsha3                    | [cobsha3](https://github.com/OCamlPro/gnucobol-contrib/tree/master/samples/cobsha3)                                    | cobsha3        | -                           |
-
+| star trek                  | [ctrek.com](https://github.com/OCamlPro/gnucobol-contrib/blob/master/samples/games/star_trek/ctrek.cob)                | star_trek      | -                           |
 
 ## Eliza
 
