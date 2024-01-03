@@ -8,7 +8,7 @@ all:	SHAKE128$(SO_EXT) SHAKE256$(SO_EXT) SHA3_224$(SO_EXT) \
         TESTSHA3$(EXE_EXT) SHA3_512.o   SESSION_ID.o TEST_SESSION_ID$(EXE_EXT) \
         SHA3_256.o   SESSION_ID_256.o TEST_SESSION_ID_256$(EXE_EXT)
 
-# SESSION_ID        cobc
+# SESSION_ID        cobccob -
 TEST_SESSION_ID$(EXE_EXT):	TEST_SESSION_ID.cob
 	cob -gxU TEST_SESSION_ID.cob $(LIB_KECCAK)
 
@@ -16,7 +16,7 @@ SESSION_ID.o:	SESSION_ID.cob SHA3_512.o
 	cob -gzU SESSION_ID.cob SHA3_512.o
     
 SHA3_512.o:	SHA3_512.cob
-	cob -gvxc -vxc 'sourceformat(free)' SHA3_512.cob
+	cob -gvxc -xc 'sourceformat(free)' SHA3_512.cob
 
 # SESSION_ID_256
 TEST_SESSION_ID_256$(EXE_EXT):	TEST_SESSION_ID_256.cob
@@ -26,7 +26,7 @@ SESSION_ID_256.o:	SESSION_ID_256.cob SHA3_256.o
 	cob -gzU SESSION_ID_256.cob SHA3_256.o
     
 SHA3_256.o:	SHA3_256.cob
-	cob -gvxc -vxc 'sourceformat(free)' SHA3_256.cob  $(LIB_KECCAK)
+	cob -gvxc 'sourceformat(free)' SHA3_256.cob  $(LIB_KECCAK)
     
 # SHA3    
 TESTSHA3$(EXE_EXT):	TESTSHA3.cob
