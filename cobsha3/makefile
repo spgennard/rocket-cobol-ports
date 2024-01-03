@@ -1,66 +1,80 @@
-all:	SHAKE128.dll SHAKE256.dll SHA3-224.dll \
-        SHA3-256.dll SHA3-384.dll SHA3-512.dll KECCAK.o \
-        TESTSHA3.exe SHA3-512.o   SESSION-ID.o TEST-SESSION-ID.exe \
-        SHA3-256.o   SESSION-ID-256.o TEST-SESSION-ID-256.exe
+EXE_EXT=
+SO_EXT=.so
+KECCAK_CBL=KECCAK.cob
+KECCAK_O=STATE_PERMUTE.o KECCAK.o READ_LANE.o WRITE_LANE.o LFSR86540.o XOR_LANE.o ROL_LANE.o
 
-# SESSION-ID        
-TEST-SESSION-ID.exe:	TEST-SESSION-ID.cob
-	cobc -x -free TEST-SESSION-ID.cob
+all:	SHAKE128$(SO_EXT) SHAKE256$(SO_EXT) SHA3_224$(SO_EXT) \
+        SHA3_256$(SO_EXT) SHA3_384$(SO_EXT) SHA3_512$(SO_EXT) KECCAK.o \
+        TESTSHA3$(EXE_EXT) SHA3_512.o   SESSION_ID.o TEST_SESSION_ID$(EXE_EXT) \
+        SHA3_256.o   SESSION_ID_256.o TEST_SESSION_ID_256$(EXE_EXT)
 
-SESSION-ID.o:	SESSION-ID.cob SHA3-512.o KECCAK.o
-	cobc -m -free SESSION-ID.cob SHA3-512.o KECCAK.o
+# SESSION_ID        cobc
+TEST_SESSION_ID$(EXE_EXT):	TEST_SESSION_ID.cob
+	cob -xU TEST_SESSION_ID.cob
+
+SESSION_ID.o:	SESSION_ID.cob SHA3_512.o $(KECCAK_O)
+	cob -z SESSION_ID.cob SHA3_512.o $(KECCAK_O)
     
-SHA3-512.o:	SHA3-512.cob
-	cobc -c -free SHA3-512.cob
+SHA3_512.o:	SHA3_512.cob
+	cob -vxc -vxc 'sourceformat(free)' SHA3_512.cob
 
-# SESSION-ID-256
-TEST-SESSION-ID-256.exe:	TEST-SESSION-ID-256.cob
-	cobc -x -free TEST-SESSION-ID-256.cob
+# SESSION_ID_256
+TEST_SESSION_ID_256$(EXE_EXT):	TEST_SESSION_ID_256.cob
+	cob -xU TEST_SESSION_ID_256.cob
 
-SESSION-ID-256.o:	SESSION-ID-256.cob SHA3-256.o KECCAK.o
-	cobc -m -free SESSION-ID-256.cob SHA3-256.o KECCAK.o
+SESSION_ID_256.o:	SESSION_ID_256.cob SHA3_256.o $(KECCAK_O)
+	cob -z SESSION_ID_256.cob SHA3_256.o $(KECCAK_O)
     
-SHA3-256.o:	SHA3-256.cob
-	cobc -c -free SHA3-256.cob
+SHA3_256.o:	SHA3_256.cob
+	cob -vxc -vxc 'sourceformat(free)' SHA3_256.cob
     
 # SHA3    
-TESTSHA3.exe:	TESTSHA3.cob
-	cobc -x -free TESTSHA3.cob
+TESTSHA3$(EXE_EXT):	TESTSHA3.cob
+	cob -xU TESTSHA3.cob
     
-SHAKE128.dll:	SHAKE128.cob KECCAK.o
-	cobc -m -free SHAKE128.cob KECCAK.o
+SHAKE128$(SO_EXT):	SHAKE128.cob $(KECCAK_O)
+	cob -z SHAKE128.cob $(KECCAK_O)
     
-SHAKE256.dll:	SHAKE256.cob KECCAK.o
-	cobc -m -free SHAKE256.cob KECCAK.o
+SHAKE256$(SO_EXT):	SHAKE256.cob $(KECCAK_O)
+	cob -z SHAKE256.cob $(KECCAK_O)
     
-SHA3-224.dll:	SHA3-224.cob KECCAK.o
-	cobc -m -free SHA3-224.cob KECCAK.o
+SHA3_224$(SO_EXT):	SHA3_224.cob $(KECCAK_O)
+	cob -z SHA3_224.cob $(KECCAK_O)
 
-SHA3-256.dll:	SHA3-256.cob KECCAK.o
-	cobc -m -free SHA3-256.cob KECCAK.o
+SHA3_256$(SO_EXT):	SHA3_256.cob $(KECCAK_O)
+	cob -z SHA3_256.cob $(KECCAK_O)
     
-SHA3-384.dll:	SHA3-384.cob KECCAK.o
-	cobc -m -free SHA3-384.cob KECCAK.o
+SHA3_384$(SO_EXT):	SHA3_384.cob $(KECCAK_O)
+	cob -z SHA3_384.cob $(KECCAK_O)
     
-SHA3-512.dll:	SHA3-512.cob KECCAK.o
-	cobc -m -free SHA3-512.cob KECCAK.o
+SHA3_512$(SO_EXT):	SHA3_512.cob $(KECCAK_O)
+	cob -z SHA3_512.cob $(KECCAK_O)
     
 KECCAK.o:	KECCAK.cob
-	cobc -c -free KECCAK.cob
-    
+	cob -vxc -vxc 'sourceformat(free)' KECCAK.cob
+
+STATE_PERMUTE.o:	KECCAK.cob
+	cob -vxc -vxc 'sourceformat(free)' KECCAK.cob
+
+XOR_LANE.o:	KECCAK.cob
+	cob -vxc -vxc 'sourceformat(free)' KECCAK.cob
+
+ROL_LANE.o:	KECCAK.cob
+	cob -vxc -vxc 'sourceformat(free)' KECCAK.cob
+
 clean:
-	rm KECCAK.o
-	rm KECCAK.dll
-	rm SHAKE128.dll
-	rm SHAKE256.dll
-	rm SHA3-224.dll
-	rm SHA3-256.dll
-	rm SHA3-384.dll
-	rm SHA3-512.dll
-	rm TESTSHA3.exe
-	rm SHA3-256.o
-	rm SESSION-ID-256.dll
-	rm TEST-SESSION-ID-256.exe
-	rm SHA3-512.o
-	rm SESSION-ID.dll
-	rm TEST-SESSION-ID.exe
+	rm -f KECCAK.o
+	rm -f KECCAK$(SO_EXT)
+	rm -f SHAKE128$(SO_EXT)
+	rm -f SHAKE256$(SO_EXT)
+	rm -f SHA3_224$(SO_EXT)
+	rm -f SHA3_256$(SO_EXT)
+	rm -f SHA3_384$(SO_EXT)
+	rm -f SHA3_512$(SO_EXT)
+	rm -f TESTSHA3$(EXE_EXT)
+	rm -f SHA3_256.o
+	rm -f SESSION_ID_256$(SO_EXT)
+	rm -f TEST_SESSION_ID_256$(EXE_EXT)
+	rm -f SHA3_512.o
+	rm -f SESSION_ID$(SO_EXT)
+	rm -f TEST_SESSION_ID$(EXE_EXT)

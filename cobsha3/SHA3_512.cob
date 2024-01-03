@@ -45,7 +45,7 @@
 *> The output length is fixed to 64 bytes.
 *>******************************************************************************
  IDENTIFICATION DIVISION.
- PROGRAM-ID. SHA3-512.
+ PROGRAM-ID. SHA3_512.
 
  ENVIRONMENT DIVISION.
 
@@ -88,4 +88,4 @@
     .
  MAIN-SHA3-512-EX.
     EXIT.
- END PROGRAM SHA3-512.
+ END PROGRAM SHA3_512.

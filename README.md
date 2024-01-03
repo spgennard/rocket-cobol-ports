@@ -32,3 +32,11 @@ Changes made;
   - convert "returning omitted" to CALL no-return-code
   - add .h and used h2py to weed-out any parameter call'ing issues
   - fix memory leak in 'C' code
+
+# cobsha3
+
+Changes made:
+
+ - binary-int is not portable changed to binary-long
+ - use of "" within quotes is not portable
+ - replace FUNCTION STORED-CHAR-LENGTH with portable ode

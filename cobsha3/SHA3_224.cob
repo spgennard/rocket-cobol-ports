@@ -45,7 +45,7 @@
 *> The output length is fixed to 28 bytes.
 *>******************************************************************************
  IDENTIFICATION DIVISION.
- PROGRAM-ID.. SHA3224.
+ PROGRAM-ID. SHA3_224.
 
  ENVIRONMENT DIVISION.
 

@@ -1,33 +1,33 @@
 *>******************************************************************************
 *>  This file is part of cobsha3.
 *>
-*>  TEST-SESSION-ID-256.cob is free software: you can redistribute it and/or 
+*>  TEST-SESSION-ID.cob is free software: you can redistribute it and/or 
 *>  modify it under the terms of the GNU Lesser General Public License as 
 *>  published by the Free Software Foundation, either version 3 of the License,
 *>  or (at your option) any later version.
 *>
-*>  TEST-SESSION-ID-256.cob is distributed in the hope that it will be useful, 
+*>  TEST-SESSION-ID.cob is distributed in the hope that it will be useful, 
 *>  but WITHOUT ANY WARRANTY; without even the implied warranty of 
 *>  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 *>  See the GNU Lesser General Public License for more details.
 *>
 *>  You should have received a copy of the GNU Lesser General Public License 
-*>  along with TEST-SESSION-ID-256.cob.
+*>  along with TEST-SESSION-ID.cob.
 *>  If not, see <http://www.gnu.org/licenses/>.
 *>******************************************************************************
 
 *>******************************************************************************
-*> Program:      TEST-SESSION-ID-256.cob
+*> Program:      TEST-SESSION-ID.cob
 *>
-*> Purpose:      Test program for the SESSION-ID-256 module
+*> Purpose:      Test program for the SESSION-ID module
 *>
 *> Author:       Laszlo Erdos - https://www.facebook.com/wortfee
 *>
 *> Date-Written: 2018.05.10
 *>
-*> Tectonics:    cobc -x -W -free TEST-SESSION-ID-256.cob
+*> Tectonics:    cobc -x -W -free TEST-SESSION-ID.cob
 *>
-*> Usage:        ./TEST-SESSION-ID-256.exe
+*> Usage:        ./TEST-SESSION-ID.exe
 *>
 *>******************************************************************************
 *> Date       Name / Change description 
@@ -40,13 +40,13 @@
 *>******************************************************************************
 
  IDENTIFICATION DIVISION.
- PROGRAM-ID. TEST-SESSION-ID-256.
+ PROGRAM-ID. TEST-SESSION-ID.
 
  ENVIRONMENT DIVISION.
 
  DATA DIVISION.
  WORKING-STORAGE SECTION.
- 01 WS-IND-1                           BINARY-INT.
+ 01 WS-IND-1                           binary-long.
 
  01 LNK-SESSION-ID.
    02 LNK-INPUT.
@@ -59,15 +59,15 @@
        88 V-NO                         VALUE 0.
        88 V-YES                        VALUE 1.
    02 LNK-OUTPUT.
-     03 LNK-SESSION-ID-BIN             PIC X(32).
-     03 LNK-SESSION-ID-HEX             PIC X(64).
-     03 LNK-USER-AGENT-HASH-BIN        PIC X(32).
-     03 LNK-USER-AGENT-HASH-HEX        PIC X(64).
+     03 LNK-SESSION-ID-BIN             PIC X(64).
+     03 LNK-SESSION-ID-HEX             PIC X(128).
+     03 LNK-USER-AGENT-HASH-BIN        PIC X(64).
+     03 LNK-USER-AGENT-HASH-HEX        PIC X(128).
  
  PROCEDURE DIVISION.
 
 *>------------------------------------------------------------------------------
- MAIN-TEST-SESSION-ID-256 SECTION.
+ MAIN-TEST-SESSION-ID SECTION.
 *>------------------------------------------------------------------------------
 
 *>  test SESSION-ID
@@ -191,8 +191,8 @@
  TEST-CALL SECTION.
 *>------------------------------------------------------------------------------
     
-    CALL "SESSION-ID-256" USING LNK-SESSION-ID END-CALL
+    CALL "SESSION_ID" USING LNK-SESSION-ID END-CALL
     .
     EXIT SECTION .
     
- END PROGRAM TEST-SESSION-ID-256.
+ END PROGRAM TEST-SESSION-ID.
