@@ -1,7 +1,7 @@
 EXE_EXT=
 SO_EXT=.so
 KECCAK_CBL=KECCAK.cob
-KECCAK_O=STATE_PERMUTE.o KECCAK.o READ_LANE.o WRITE_LANE.o LFSR86540.o XOR_LANE.o ROL_LANE.o
+LIB_KECCAK=-L. -lKECCAK
 
 all:	SHAKE128$(SO_EXT) SHAKE256$(SO_EXT) SHA3_224$(SO_EXT) \
         SHA3_256$(SO_EXT) SHA3_384$(SO_EXT) SHA3_512$(SO_EXT) KECCAK.o \
@@ -10,57 +10,48 @@ all:	SHAKE128$(SO_EXT) SHAKE256$(SO_EXT) SHA3_224$(SO_EXT) \
 
 # SESSION_ID        cobc
 TEST_SESSION_ID$(EXE_EXT):	TEST_SESSION_ID.cob
-	cob -xU TEST_SESSION_ID.cob
+	cob -gxU TEST_SESSION_ID.cob $(LIB_KECCAK)
 
-SESSION_ID.o:	SESSION_ID.cob SHA3_512.o $(KECCAK_O)
-	cob -z SESSION_ID.cob SHA3_512.o $(KECCAK_O)
+SESSION_ID.o:	SESSION_ID.cob SHA3_512.o
+	cob -gzU SESSION_ID.cob SHA3_512.o
     
 SHA3_512.o:	SHA3_512.cob
-	cob -vxc -vxc 'sourceformat(free)' SHA3_512.cob
+	cob -gvxc -vxc 'sourceformat(free)' SHA3_512.cob
 
 # SESSION_ID_256
 TEST_SESSION_ID_256$(EXE_EXT):	TEST_SESSION_ID_256.cob
-	cob -xU TEST_SESSION_ID_256.cob
+	cob -gxU TEST_SESSION_ID_256.cob  $(LIB_KECCAK)
 
-SESSION_ID_256.o:	SESSION_ID_256.cob SHA3_256.o $(KECCAK_O)
-	cob -z SESSION_ID_256.cob SHA3_256.o $(KECCAK_O)
+SESSION_ID_256.o:	SESSION_ID_256.cob SHA3_256.o
+	cob -gzU SESSION_ID_256.cob SHA3_256.o
     
 SHA3_256.o:	SHA3_256.cob
-	cob -vxc -vxc 'sourceformat(free)' SHA3_256.cob
+	cob -gvxc -vxc 'sourceformat(free)' SHA3_256.cob  $(LIB_KECCAK)
     
 # SHA3    
 TESTSHA3$(EXE_EXT):	TESTSHA3.cob
-	cob -xU TESTSHA3.cob
+	cob -gxU TESTSHA3.cob $(LIB_KECCAK)
     
-SHAKE128$(SO_EXT):	SHAKE128.cob $(KECCAK_O)
-	cob -z SHAKE128.cob $(KECCAK_O)
+SHAKE128$(SO_EXT):	SHAKE128.cob 
+	cob -gzU SHAKE128.cob $(LIB_KECCAK)
     
-SHAKE256$(SO_EXT):	SHAKE256.cob $(KECCAK_O)
-	cob -z SHAKE256.cob $(KECCAK_O)
-    
-SHA3_224$(SO_EXT):	SHA3_224.cob $(KECCAK_O)
-	cob -z SHA3_224.cob $(KECCAK_O)
+SHAKE256$(SO_EXT):	SHAKE256.cob
+	cob -gzU SHAKE256.cob $(LIB_KECCAK)
 
-SHA3_256$(SO_EXT):	SHA3_256.cob $(KECCAK_O)
-	cob -z SHA3_256.cob $(KECCAK_O)
+SHA3_224$(SO_EXT): SHA3_224.cob
+	cob -gzU SHA3_224.cob $(LIB_KECCAK)
+
+SHA3_256$(SO_EXT):	SHA3_256.cob
+	cob -gzU SHA3_256.cob $(LIB_KECCAK)
     
-SHA3_384$(SO_EXT):	SHA3_384.cob $(KECCAK_O)
-	cob -z SHA3_384.cob $(KECCAK_O)
+SHA3_384$(SO_EXT):	SHA3_384.cob
+	cob -gzU SHA3_384.cob $(LIB_KECCAK)
     
-SHA3_512$(SO_EXT):	SHA3_512.cob $(KECCAK_O)
-	cob -z SHA3_512.cob $(KECCAK_O)
+SHA3_512$(SO_EXT):	SHA3_512.cob
+	cob -gzU SHA3_512.cob $(LIB_KECCAK)
     
 KECCAK.o:	KECCAK.cob
-	cob -vxc -vxc 'sourceformat(free)' KECCAK.cob
-
-STATE_PERMUTE.o:	KECCAK.cob
-	cob -vxc -vxc 'sourceformat(free)' KECCAK.cob
-
-XOR_LANE.o:	KECCAK.cob
-	cob -vxc -vxc 'sourceformat(free)' KECCAK.cob
-
-ROL_LANE.o:	KECCAK.cob
-	cob -vxc -vxc 'sourceformat(free)' KECCAK.cob
+	cob -gvZ -o libKECCAK.so KECCAK.cob 
 
 clean:
 	rm -f KECCAK.o
