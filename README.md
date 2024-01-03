@@ -8,6 +8,7 @@ COBOL source code compatible with 'Micro Focus COBOL' ported from the web
 | raylib_painter             | [CobolDraw.cob](https://github.com/OCamlPro/gnucobol-contrib/blob/master/samples/raylib_painter/CobolDraw.cob)         | raylib_painter | -                           |
 | cobsha3                    | [cobsha3](https://github.com/OCamlPro/gnucobol-contrib/tree/master/samples/cobsha3)                                    | cobsha3        | -                           |
 | star trek                  | [ctrek.com](https://github.com/OCamlPro/gnucobol-contrib/blob/master/samples/games/star_trek/ctrek.cob)                | star_trek      | -                           |
+| cobdes                     | [cobdes](https://github.com/OCamlPro/gnucobol-contrib/tree/master/samples/cobdes)                                      | cobdes         |                             |
 
 ## Eliza
 
