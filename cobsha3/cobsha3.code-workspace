@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"coboleditor.metadata_symbols": [
+			"state_permute,KECCAK.cob,218",
+			"read_lane,KECCAK.cob,625",
+			"write_lane,KECCAK.cob,662",
+			"xor_lane,KECCAK.cob,699",
+			"rol_lane,KECCAK.cob,745",
+			"lfsr86540,KECCAK.cob,804"
+		],
+		"coboleditor.metadata_entrypoints": [],
+		"coboleditor.metadata_types": [],
+		"coboleditor.metadata_files": [
+			"1704298347359,SESSION-ID.cob"
+		],
+		"coboleditor.metadata_knowncopybooks": []
+	}
+}
