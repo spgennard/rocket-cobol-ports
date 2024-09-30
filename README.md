@@ -1,14 +1,14 @@
 # rocket-cobol-ports - Directory
-COBOL source code compatible with 'Micro Focus COBOL' ported from the web
+COBOL source code compatible with 'Rocket COBOL' ported from the web
 
-| Description                | Original Source                                                                                                        | Directory      | Minimum Micro Focus Version |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------- | -------------- | --------------------------- |
-| Eliza in Micro Focus COBOL | [eliza.cbl](https://github.com/OCamlPro/gnucobol-contrib/blob/master/samples/eliza/eliza.cbl)                          | eliza          | 9.0                         |
-| Prime Machine              | [prime_machiine.cob](https://github.com/OCamlPro/gnucobol-contrib/blob/master/samples/prime_machine/prime_machine.cob) | prime_machine  | -                           |
-| raylib_painter             | [CobolDraw.cob](https://github.com/OCamlPro/gnucobol-contrib/blob/master/samples/raylib_painter/CobolDraw.cob)         | raylib_painter | -                           |
-| cobsha3                    | [cobsha3](https://github.com/OCamlPro/gnucobol-contrib/tree/master/samples/cobsha3)                                    | cobsha3        | -                           |
-| star trek                  | [ctrek.com](https://github.com/OCamlPro/gnucobol-contrib/blob/master/samples/games/star_trek/ctrek.cob)                | star_trek      | -                           |
-| cobdes                     | [cobdes](https://github.com/OCamlPro/gnucobol-contrib/tree/master/samples/cobdes)                                      | cobdes         |                             |
+| Description           | Original Source                                                                                                        | Directory      | Minimum Version |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------- | -------------- | --------------- |
+| Eliza in Rocket COBOL | [eliza.cbl](https://github.com/OCamlPro/gnucobol-contrib/blob/master/samples/eliza/eliza.cbl)                          | eliza          | 9.0             |
+| Prime Machine         | [prime_machiine.cob](https://github.com/OCamlPro/gnucobol-contrib/blob/master/samples/prime_machine/prime_machine.cob) | prime_machine  | -               |
+| raylib_painter        | [CobolDraw.cob](https://github.com/OCamlPro/gnucobol-contrib/blob/master/samples/raylib_painter/CobolDraw.cob)         | raylib_painter | -               |
+| cobsha3               | [cobsha3](https://github.com/OCamlPro/gnucobol-contrib/tree/master/samples/cobsha3)                                    | cobsha3        | -               |
+| star trek             | [ctrek.com](https://github.com/OCamlPro/gnucobol-contrib/blob/master/samples/games/star_trek/ctrek.cob)                | star_trek      | -               |
+| cobdes                | [cobdes](https://github.com/OCamlPro/gnucobol-contrib/tree/master/samples/cobdes)                                      | cobdes         |                 |
 
 ## Eliza
 
