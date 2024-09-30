@@ -1,4 +1,4 @@
-# mfcobol-ports - Directory
+# rocket-cobol-ports - Directory
 COBOL source code compatible with 'Micro Focus COBOL' ported from the web
 
 | Description                | Original Source                                                                                                        | Directory      | Minimum Micro Focus Version |
