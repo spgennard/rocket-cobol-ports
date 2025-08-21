@@ -38,3 +38,9 @@ The 5th colum is the flower's label.
 
 ------
 [![donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=76N3LUCQ9FENS&currency_code=USD&source=url)
+
+
+## Port Changes
+
+Original can be found @ https://github.com/victorqribeiro/perceptronCobol
+Code changes can be found in ths git history
