@@ -9,6 +9,7 @@ COBOL source code compatible with 'Rocket COBOL' ported from the web
 | cobsha3               | [cobsha3](https://github.com/OCamlPro/gnucobol-contrib/tree/master/samples/cobsha3)                                    | cobsha3        | -               |
 | star trek             | [ctrek.com](https://github.com/OCamlPro/gnucobol-contrib/blob/master/samples/games/star_trek/ctrek.cob)                | star_trek      | -               |
 | cobdes                | [cobdes](https://github.com/OCamlPro/gnucobol-contrib/tree/master/samples/cobdes)                                      | cobdes         |                 |
+| perceptronCobol | [perceptronCobol](https://github.com/victorqribeiro/perceptronCobol) | |
 
 ## Eliza
 
@@ -46,3 +47,6 @@ Changes made:
 
 TODO:
  - Convert TES* source to a proper unit test
+
+ ## perceptronCobol
+  - Use function numval to convert pic x's to pic 9
